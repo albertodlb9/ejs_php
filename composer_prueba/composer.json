@@ -1,0 +1,9 @@
+{
+    "name": "alberto/composer_prueba",
+    "description": "asaddas",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "license": "MIT"
+}

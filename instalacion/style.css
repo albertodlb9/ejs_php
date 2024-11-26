@@ -1,0 +1,10 @@
+.instalacion{
+    background-color: green;
+    text-align: center;
+    border-radius: 10px;
+}
+.error{
+    background-color: red;
+    text-align: center;
+    border-radius: 10px;
+}

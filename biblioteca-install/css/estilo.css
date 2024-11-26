@@ -1,0 +1,68 @@
+form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+label{
+    margin-top: 10px;
+}
+input{
+    margin-bottom: 10px;
+}
+select,form button{
+    margin-bottom: 10px;
+    display: inline;
+}
+header, footer{
+    background-color: #ccc;
+    text-align: center;
+    padding: 10px;
+}
+nav{
+    background-color: #eee;
+    text-align: center;
+    padding: 10px;
+}
+nav a, td a{
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+}
+nav a:hover, td a:hover{
+    background-color: #ccc;
+}
+table{
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+tr, td{
+    border: 1px solid #000;
+    padding: 10px;
+}
+tr:nth-child(even){
+    background-color: #eee;
+}
+tr:nth-child(odd){
+    background-color: #fff;
+}
+tr:first-child{
+    background-color: #ccc;
+}
+td a{
+    background-color: burlywood;
+    display: block;
+    border-radius: 5%;
+}
+.exito{
+    background-color: green;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.error{
+    background-color: red;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}

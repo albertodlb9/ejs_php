@@ -38,7 +38,7 @@
         }
 
         public function listar(){
-            $sql = "SELECT * FROM usuarios";
+            $sql = "SELECT * FROM usuarios;";
             $sentencia = $this->conexion->prepare($sql);
             $sentencia->execute();
             $resultado = $sentencia->fetchAll();
@@ -59,6 +59,18 @@
             $sentencia->execute();
             $resultado = $sentencia->fetch();
             return $resultado;
+        }
+
+        public function modificar($nombre, $apellidos, $usuario, $nuevoLogin, $password, $rol){
+            $sql = "UPDATE usuarios SET nombre = :nombre, login = :login, apellidos = :apellidos, rol = :rol, password=:password WHERE login = :usuario";
+            $sentencia = $this->conexion->prepare($sql);
+            $sentencia->bindParam(':nombre', $nombre);
+            $sentencia->bindParam(':apellidos', $apellidos);
+            $sentencia->bindParam(':rol', $rol);
+            $sentencia->bindParam(':usuario', $usuario);
+            $sentencia->bindParam(':password', $password);
+            $sentencia->bindParam(':login', $nuevoLogin);
+            $sentencia->execute();
         }
     }
 ?>

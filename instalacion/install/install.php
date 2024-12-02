@@ -1,6 +1,7 @@
 <?php
     if(file_exists('../config.php') && filesize('../config.php') > 0){
         header('Location: ../index.php');
+        exit();
     }
     if($_POST["instalar"] && is_writable('./')){
         $mensaje = "";

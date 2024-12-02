@@ -72,5 +72,13 @@
             $sentencia->bindParam(':login', $nuevoLogin);
             $sentencia->execute();
         }
+
+        public function cambiarPassword($password,$login){
+            $sql = "UPDATE usuarios SET password = :password WHERE login = :login;";
+            $sentencia = $this->conexion->prepare($sql);
+            $sentencia->bindParam(":password",$password);
+            $sentencia->bindParam(":login",$login);
+            $sentencia->execute();
+        }
     }
 ?>

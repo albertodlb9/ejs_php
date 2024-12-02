@@ -22,13 +22,13 @@ class autores{
      return $this->conexion->lastInsertId();
  }
  public function borrar($id){
-     $sql = "DELETE FROM $this->tabla WHERE id = :id";
+     $sql = "DELETE FROM $this->tabla WHERE idAutor = :id";
      $stmt = $this->conexion->prepare($sql);
      $stmt->bindParam(':id', $id);
      $stmt->execute();
  }
     public function actualizar($id, $nombre, $apellidos, $nacionalidad){
-        $sql = "UPDATE $this->tabla SET Nombre = :nombre, Apellidos = :apellidos, Pais = :nacionalidad WHERE id = :id";
+        $sql = "UPDATE $this->tabla SET Nombre = :nombre, Apellidos = :apellidos, Pais = :nacionalidad WHERE idAutor = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':apellidos', $apellidos);
@@ -48,7 +48,7 @@ class autores{
         return $stmt->fetchAll();
     }
     public function getAutor($id){
-        $sql = "SELECT * FROM $this->tabla WHERE id = :id";
+        $sql = "SELECT * FROM $this->tabla WHERE idAutor = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

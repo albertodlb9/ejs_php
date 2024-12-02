@@ -52,6 +52,7 @@ $seguridad = new Seguridad();
         <nav id='menu'>    
         <a href="listadoLibros.php">Listado de libros</a>
         <a href="listadoAutores.php">Listado de autores</a>
+        <a href="cambiarPassword.php">Cambiar contraseña</a>
         <?php
             if($seguridad->acceso('bibliotecario')){
         ?>

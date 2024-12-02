@@ -23,7 +23,7 @@ class libros{
         return $this->conexion->lastInsertId();
     }
     public function borrar($id){
-        $sql = "DELETE FROM $this->tabla WHERE id = :id";
+        $sql = "DELETE FROM $this->tabla WHERE idLibro = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

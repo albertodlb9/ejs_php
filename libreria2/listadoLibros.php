@@ -17,7 +17,6 @@
 <body>
     
     <?php
-        session_start();
         if(isset($_SESSION['rol'])){
             $usuario = $_SESSION['usuario'];
             echo "<p><strong>$usuario</strong>  <a href='cerrarSesion.php'>Cerrar sesion</a></p>";
@@ -60,11 +59,11 @@
     foreach($listado as $libro){
         $autor = $autores->getAutor($libro['idAutor']);
         echo "<tr>";
-        echo "<td>".$libro['Titulo']."</td>";
-        echo "<td>".$libro['Genero']."</td>";
+        echo "<td>".$libro['titulo']."</td>";
+        echo "<td>".$libro['genero']."</td>";
         echo "<td>$autor[Nombre] $autor[Apellidos]</td>";
-        echo "<td>".$libro['NumeroPaginas']."</td>";
-        echo "<td>".$libro['NumeroEjemplares']."</td>";
+        echo "<td>".$libro['numeroPaginas']."</td>";
+        echo "<td>".$libro['numeroEjemplares']."</td>";
         echo "<td><a href='actualizarLibro.php?id=".$libro['id']."'>Actualizar</a></td>";
         echo "<td><a href='borrarLibro.php?id=".$libro['id']."'>Borrar</a></td>";
         echo "</tr>";

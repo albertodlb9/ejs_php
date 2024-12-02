@@ -1,5 +1,5 @@
 <?php
-    if(file_exists('config.php') && filesize('config.php') > 0){
+    if(file_exists('../config.php') && filesize('../config.php') > 0){
         header('Location: ../index.php');
     }
     if($_POST["instalar"] && is_writable('./')){

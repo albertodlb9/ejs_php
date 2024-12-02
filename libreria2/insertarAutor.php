@@ -26,22 +26,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insertar autor</title>
-    <link rel="stylesheet" href="../ejercicios.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['rol'])){
+            $usuario = $_SESSION['usuario'];
+            echo "<p><strong>$usuario</strong>  <a href='cerrarSesion.php'>Cerrar sesion</a></p>";
+        }
+    ?>
     <h1>Insertar autor</h1>
     <nav id='menu'>
-        <a href="listadoLibros.php">Listado de libros</a>
-        <a href="listadoAutores.php">Listado de autores</a>
-        <a href="insertarLibro.php">Insertar libro</a>
+        <ul>
+        <li><a href="listadoLibros.php">Listado de libros</a></li>
+        <li><a href="listadoAutores.php">Listado de autores</a></li>
+        </ul>
     </nav>
     <form action="insertarAutor.php" method="post">
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre">
+        <br>
         <label for="apellidos">Apellidos</label>
         <input type="text" name="apellidos" id="apellidos">
+        <br>
         <label for="nacionalidad">Nacionalidad</label>
         <input type="text" name="nacionalidad" id="nacionalidad">
+        <br>
         <input type="submit" name="Insertar" value="Insertar">
     </form>
     <?php

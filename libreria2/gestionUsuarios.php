@@ -23,6 +23,7 @@
         <a href="index.php">Volver al inicio</a>
     </nav>
     <h2>Lista de usuarios</h2>
+    <div class="tabla">
     <table>
         <tr>
             <th>Nombre</th>
@@ -48,5 +49,7 @@
                 echo "</tr>";
             }
         ?>
+    </table>
+    </div>
 </body>
 </html>

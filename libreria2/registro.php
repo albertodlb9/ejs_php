@@ -24,9 +24,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Biblioteca 2.0</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php">Volver al inicio</a></li>
+        </ul>
+    </nav>
     <h2>Registro de usuario</h2>
     <form action="" method="post">
         <label for="nombre">Nombre:</label>

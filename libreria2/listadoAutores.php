@@ -1,7 +1,7 @@
 <?php
     require_once "seguridad.php";
     $seguridad = new Seguridad();
-    if(!$seguridad->acceso("bibliotecario")){
+    if(!$seguridad->acceso("bibliotecario","administrador")){
         header("Location: index.php");
     }
 
@@ -21,25 +21,26 @@
             echo "<p><strong>$usuario</strong>  <a href='cerrarSesion.php'>Cerrar sesion</a></p>";
             echo "<h1>Listado de autores</h1>";
     ?>
-    <nav id='menu'>    
+    <nav id='menu'>  
+        <ul>
+            <li><a href="index.php">Volver al inicio</a></li>
+            <li><a href="listadoLibros.php">Listado de libros</a></li>  
     <?php
-        if($_SESSION['rol'] == 'administrador' || $_SESSION['rol'] == 'bibliotecario'){
+        if($_SESSION['rol'] == 'bibliotecario'){
     ?>
-    <a href="listadoLibros.php">Listado de libros</a>
-    <a href="insertarLibro.php">Insertar libro</a>
+    <li><a href="insertarLibro.php">Insertar libro</a></li>
     <?php
-            if($_SESSION['rol'] == 'administrador'){
+        }
+        if($_SESSION['rol'] == 'administrador'){
     ?>
-    <a href="gestionarUsuarios.php">Gestion de usuarios</a>
+    <li><a href="gestionUsuarios.php">Gestion de usuarios</a></li>
     <?php
             }
         }
     ?>
+        </ul>
     </nav>
-    <?php
-        }
-    ?>
-
+    <div class="tabla">
     <table>
         <tr>
             <th>Nombre</th>
@@ -56,12 +57,13 @@
                 echo "<td>".$autor["Nombre"]."</td>";
                 echo "<td>".$autor["Apellidos"]."</td>";
                 echo "<td>".$autor["Pais"]."</td>";
-                echo "<td><a href='borrarAutor.php?id=".$autor["idAutor"]."'>Eliminar</a></td>";
-                echo "<td><a href='modificarAutor.php?id=".$autor["idAutor"]."'>Modificar</a></td>";
+                echo "<td class='modificar'><button class='red'><a href='borrarAutor.php?id=".$autor["idAutor"]."'>Eliminar</a></button></td>";
+                echo "<td class='eliminar'><button class='green'><a href='modificarAutor.php?id=".$autor["idAutor"]."'>Modificar</a></button></td>";
                 echo "</tr>";
             }
 
         ?>
     </table>
+    </div>
 </body>
 </html>

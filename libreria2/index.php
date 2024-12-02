@@ -49,23 +49,25 @@ $seguridad = new Seguridad();
             if($seguridad->acceso('registrado', 'bibliotecario', 'administrador')){
                 echo "<h2>Bienvenido ".$_SESSION['usuario']."</h2>";
         ?>
-        <nav id='menu'>    
-        <a href="listadoLibros.php">Listado de libros</a>
-        <a href="listadoAutores.php">Listado de autores</a>
-        <a href="cambiarPassword.php">Cambiar contraseña</a>
+        <nav id='menu'>
+            <ul>
+        <li><a href="listadoLibros.php">Listado de libros</a></li>
+        <li><a href="listadoAutores.php">Listado de autores</a></li>
+        <li><a href="cambiarPassword.php">Cambiar contraseña</a></li>
         <?php
             if($seguridad->acceso('bibliotecario')){
         ?>
-        <a href="insertarLibro.php">Insertar libro</a>
+        <li><a href="insertarLibro.php">Insertar libro</a></li>
         <?php
             }
             if($seguridad->acceso('administrador')){
         ?>
-        <a href="gestionUsuarios.php">Gestion de usuarios</a>
+        <li><a href="gestionUsuarios.php">Gestion de usuarios</a></li>
         <?php
             }
-            echo "<a href='cerrarSesion.php'>Cerrar sesion</a>";
+            echo "<li><a href='cerrarSesion.php'>Cerrar sesion</a></li>";
         ?>
+        </ul>
         </nav>
         <?php
         }else{
@@ -73,11 +75,15 @@ $seguridad = new Seguridad();
         <form action="" method="post">
             <label for="usuario">Usuario:</label>
             <input type="text" name="usuario" id="usuario">
+            <br>
             <label for="password">Contraseña:</label>
             <input type="password" name="password" id="password">
-            <input type="submit" name="enviar" value="Entrar">
+            <br>
+            <div class="entrar">
+                <input type="submit" name="enviar" value="Entrar" class="entrar">
+                <button class="registrar"><a href="registro.php">Registrate</a></button>
+            </div>
         </form>
-        <a href="registro.php">Si no tienes cuenta registrate</a>
         <?php
         }
         ?>

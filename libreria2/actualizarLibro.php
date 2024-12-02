@@ -1,4 +1,6 @@
 <?php
+    require_once "seguridad.php";
+    
     require_once 'conexion.php';
     require_once 'libros.php';
     $libros = new libros(conexion::getConn(), 'libros');
@@ -29,16 +31,16 @@
    
         </nav>
     <form action="actualizarLibro.php" method="post">
-        <input type="hidden" name="id" value='<?php echo $libro['id'];?>'>
+        <input type="hidden" name="id" value='<?php echo $libro['idLibro'];?>'>
         <label for="titulo">Título</label>
         <input type="text" name="titulo" id="titulo" 
-        value='<?php echo $libro['Titulo'];?>'>
+        value='<?php echo $libro['titulo'];?>'>
         <label for="autor">Autor</label>
         <input type="text" name="autor" id="autor" 
         value='<?php echo $libro['idAutor'];?>'>
         <label for="genero">Genero</label>
         <select id="genero" name="genero"
-        value='<?php echo $libro['Genero'];?>'>
+        value='<?php echo $libro['genero'];?>'>
             <option value="Narrativa">Narrativa</option>
             <option value="Lírica">Lírica</option>
             <option value="Teatro">Teatro</option>
@@ -47,10 +49,10 @@
       
         <label for="nPaginas">Número de páginas</label>
         <input type="number" name="nPaginas" id="nPaginas"
-        value='<?php echo $libro['NumeroPaginas'];?>'>
+        value='<?php echo $libro['numeroPaginas'];?>'>
         <label for="nEjemplares">Número de ejemplares</label>
         <input type="number" name="nEjemplares" id="nEjemplares"
-        value='<?php echo $libro['NumeroEjemplares']; ?>'>
+        value='<?php echo $libro['numeroEjemplares']; ?>'>
         <input type="submit" name="Actualizar" value="Actualizar">
     
     </form>

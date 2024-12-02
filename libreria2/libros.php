@@ -29,7 +29,7 @@ class libros{
         $stmt->execute();
     }
     public function actualizar($id, $titulo, $genero,$autor,$nPaginas,$nEjemplares){
-        $sql = "UPDATE  $this->tabla SET Titulo = :titulo, Genero = :genero, idAutor = :autor, NumeroPaginas = :nPaginas, NumeroEjemplares = :nEjemplares WHERE id = :id";
+        $sql = "UPDATE  $this->tabla SET Titulo = :titulo, Genero = :genero, idAutor = :autor, NumeroPaginas = :nPaginas, NumeroEjemplares = :nEjemplares WHERE idLibro = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':genero', $genero);
@@ -50,7 +50,7 @@ class libros{
         return $stmt->fetchAll();
     }
     public function getLibro($id){
-        $sql = "SELECT * FROM $this->tabla WHERE id = :id";
+        $sql = "SELECT * FROM $this->tabla WHERE idLibro = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

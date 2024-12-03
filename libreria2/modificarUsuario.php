@@ -22,14 +22,31 @@
         $nuevoLogin = $_POST['login'];
         $rol = $_POST['rol'];
         if($_POST['contraseña'] != ''){
-            $contraseña = $_POST['contraseña'];
-            $password = password_hash($password.$salt, PASSWORD_DEFAULT);
+            $password = $_POST['contraseña'];
+            $contraseña = password_hash($password.$salt, PASSWORD_DEFAULT);
         }else{
-            $contraseña= $password;
+            $contraseña = $password;     
         }
-        $usuario = new usuario(conexion::getConn());
-        $usuario->modificar($nombre, $apellidos, $login, $nuevoLogin, $password, $rol);
-        header('Location: gestionUsuarios.php');
+        if(isset($_FILES["avatar"] ) && $_FILES["avatar"]["error"] == UPLOAD_ERR_OK){    
+            $ruta = $_FILES["avatar"]["tmp_name"];
+            $tipo = $_FILES["avatar"]["type"];
+            $tam = $_FILES["avatar"]["size"];
+            $destino = "./imagenes/".$nuevoLogin;
+            if(move_uploaded_file($ruta, $destino) && $tam < 1000000){
+                $avatar = $destino;
+                $usuario = new usuario(conexion::getConn());
+                $usuario->modificar($nombre, $apellidos, $login, $nuevoLogin, $contraseña,$avatar, $rol);
+                header('Location: gestionUsuarios.php?msg=Usuario modificado correctamente');
+            }else{
+                header('Location: gestionUsuarios.php?err=Error al modificar el usuariomiau');
+            }
+        }else{
+            $avatar = "./imagenes/".$nuevoLogin;
+            $usuario = new usuario(conexion::getConn());
+            rename("./imagenes/".$login, $avatar);
+            $usuario->modificar($nombre, $apellidos, $login, $nuevoLogin, $contraseña ,$avatar, $rol);
+            header('Location: gestionUsuarios.php?msg=Usuario modificado correctamente');
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -43,7 +60,10 @@
 <body>
     <h1>Modificar usuario</h1>
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
+            <label for="avatar">Avatar:</label>
+            <input type="file" name="avatar" id="">
+            <br>
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>" required>
             <br>

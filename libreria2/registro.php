@@ -13,8 +13,19 @@
         $apellidos = $_POST['apellidos'];
         $login = $_POST['usuario'];
         $password = $_POST['password'];
-        $usuario->registrar($nombre, $apellidos, $login, $password);
-        header('Location: index.php?msg=Usuario registrado correctamente');
+        if(isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == UPLOAD_ERR_OK){    
+            $ruta = $_FILES["avatar"]["tmp_name"];
+            $tipo = $_FILES["avatar"]["type"];
+            $tam = $_FILES["avatar"]["size"];
+            $destino = "./imagenes/".$login;
+            $avatar = $destino;
+            if(move_uploaded_file($ruta, $avatar) && $tam < 1000000){    
+                $usuario->registrar($nombre, $apellidos, $login, $password,$avatar);
+                header('Location: index.php?msg=Usuario registrado correctamente');
+            }else{
+                header('Location: index.php?err=Error al registrar el usuario');
+            }
+        }
     }
 
 ?>
@@ -34,7 +45,9 @@
         </ul>
     </nav>
     <h2>Registro de usuario</h2>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
+        <label for="avatar">Avatar:</label>
+        <input type="file" name="avatar" id="avatar">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required>
         <br>

@@ -20,12 +20,15 @@
     ?>
     <h1>Gestion de usuarios</h1>
     <nav id='menu'>
-        <a href="index.php">Volver al inicio</a>
+        <ul>
+        <li><a href="index.php">Volver al inicio</a></li>
+        </ul>
     </nav>
     <h2>Lista de usuarios</h2>
     <div class="tabla">
     <table>
         <tr>
+            <th>Avatar</th>
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Usuario</th>
@@ -38,6 +41,7 @@
             $listado = $usuarios->listar();
             foreach($listado as $usuario){
                 echo "<tr>";
+                echo "<td><img width='80px' src='".$usuario['avatar']."'></img></td>";
                 echo "<td>".$usuario['nombre']."</td>";
                 echo "<td>".$usuario['apellidos']."</td>";
                 echo "<td>".$usuario['login']."</td>";

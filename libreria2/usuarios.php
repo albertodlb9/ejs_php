@@ -22,8 +22,8 @@
             }
         }
 
-        public function registrar($nombre, $apellidos, $usuario, $password){
-            $sql = "INSERT INTO usuarios(nombre, apellidos, login, password, salt, rol) VALUES(:nombre, :apellidos, :usuario, :password, :salt, :rol)";
+        public function registrar($nombre, $apellidos, $usuario, $password,$avatar){
+            $sql = "INSERT INTO usuarios(nombre, apellidos, login, password, salt, avatar, rol) VALUES(:nombre, :apellidos, :usuario, :password, :salt, :avatar, :rol)";
             $salt = random_int(10000000,99999999);
             $rol = 'registrado';
             $password = password_hash($password.$salt, PASSWORD_DEFAULT);
@@ -34,6 +34,7 @@
             $sentencia->bindParam(':password', $password);
             $sentencia->bindParam(':salt', $salt);
             $sentencia->bindParam(':rol', $rol);
+            $sentencia->bindParam(':avatar', $avatar);
             $sentencia->execute();
         }
 
@@ -61,8 +62,8 @@
             return $resultado;
         }
 
-        public function modificar($nombre, $apellidos, $usuario, $nuevoLogin, $password, $rol){
-            $sql = "UPDATE usuarios SET nombre = :nombre, login = :login, apellidos = :apellidos, rol = :rol, password=:password WHERE login = :usuario";
+        public function modificar($nombre, $apellidos, $usuario, $nuevoLogin, $password, $avatar, $rol){
+            $sql = "UPDATE usuarios SET nombre = :nombre, login = :login, apellidos = :apellidos, rol = :rol, password=:password, avatar=:avatar WHERE login = :usuario";
             $sentencia = $this->conexion->prepare($sql);
             $sentencia->bindParam(':nombre', $nombre);
             $sentencia->bindParam(':apellidos', $apellidos);
@@ -70,6 +71,7 @@
             $sentencia->bindParam(':usuario', $usuario);
             $sentencia->bindParam(':password', $password);
             $sentencia->bindParam(':login', $nuevoLogin);
+            $sentencia->bindParam(':avatar', $avatar);
             $sentencia->execute();
         }
 

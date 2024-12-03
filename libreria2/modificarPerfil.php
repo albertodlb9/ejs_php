@@ -14,16 +14,42 @@
         $login = $_POST['usuario'];
         $busqueda = $usuario->buscar($_SESSION['usuario']);
         $password = $busqueda['password'];
-        try{
-            $modificar = $usuario->modificar($nombre, $apellidos, $_SESSION['usuario'], $login, $password, $_SESSION['rol']);
-            $_SESSION['nombre'] = $nombre;
-            $_SESSION['apellidos'] = $apellidos;
-            $_SESSION['usuario'] = $login;
-            header('Location: modificarPerfil.php?msg=Datos modificados correctamente');
-        }catch(Exception $e){
-            $error = $e->getMessage();
-            header('Location: modificarPerfil.php?err='.$error);
+        if(isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == UPLOAD_ERR_OK){    
+            $ruta = $_FILES["avatar"]["tmp_name"];
+            $tipo = $_FILES["avatar"]["type"];
+            $tam = $_FILES["avatar"]["size"];
+            $destino = "./imagenes/".$login;
+            $avatar = $destino;
+            if(move_uploaded_file($ruta, $avatar) && $tam < 1000000){    
+                try{
+                    unlink("./imagenes/".$_SESSION['usuario']);
+                    $modificar = $usuario->modificar($nombre, $apellidos, $_SESSION['usuario'], $login, $password, $avatar, $_SESSION['rol']);
+                    $_SESSION['nombre'] = $nombre;
+                    $_SESSION['apellidos'] = $apellidos;
+                    $_SESSION['usuario'] = $login;
+                    header('Location: modificarPerfil.php?msg=Datos modificados correctamente');
+                }catch(Exception $e){
+                    $error = $e->getMessage();
+                    header('Location: modificarPerfil.php?err='.$error);
+                }
+            }else{
+                header('Location: modificarPerfil.php?err=Error al modificar los datos');
+            }
+        }else{           
+            $avatar = "./imagenes/".$login;
+            rename("./imagenes/".$_SESSION['usuario'], $avatar);
+            try{
+                $modificar = $usuario->modificar($nombre, $apellidos, $_SESSION['usuario'], $login, $password, $avatar, $_SESSION['rol']);
+                $_SESSION['nombre'] = $nombre;
+                $_SESSION['apellidos'] = $apellidos;
+                $_SESSION['usuario'] = $login;
+                header('Location: modificarPerfil.php?msg=Datos modificados correctamente');
+            }catch(Exception $e){
+                $error = $e->getMessage();
+                header('Location: modificarPerfil.php?err='.$error);
+            }
         }
+        
     }
 
 ?>
@@ -54,7 +80,10 @@
             <li><a href="index.php">Volver al inicio</a></li>
         </ul>
     </nav>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
+        <img  width="100px" <?php echo "src='./imagenes/".$_SESSION["usuario"]."'" ?> alt="">
+        <label for="avatar">Avatar</label>
+        <input type="file" name="avatar" id="avatar"> 
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre" value="<?php echo $_SESSION['nombre']?>">
         <label for="apellidos">Apellidos</label>

@@ -1,7 +1,7 @@
 <?php
     require_once "seguridad.php";
     $seguridad = new Seguridad();
-    if(!$seguridad->acceso("bibliotecario","administrador")){
+    if(!$seguridad->acceso("bibliotecario")){
         header("Location: index.php");
     }
 

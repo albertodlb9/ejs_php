@@ -68,8 +68,10 @@
                 echo "<td>$autor[Nombre] $autor[Apellidos]</td>";
                 echo "<td>".$libro['numeroPaginas']."</td>";
                 echo "<td>".$libro['numeroEjemplares']."</td>";
-                echo "<td class='modificar'><button class='green'><a href='actualizarLibro.php?id=".$libro['idLibro']."'>Actualizar</a></button></td>";
-                echo "<td class='eliminar'><button class='red'><a href='borrarLibro.php?id=".$libro['idLibro']."'>Borrar</a></button></td>";
+                if($seguridad->acceso('bibliotecario')){
+                    echo "<td class='modificar'><button class='green'><a href='actualizarLibro.php?id=".$libro['idLibro']."'>Actualizar</a></button></td>";
+                    echo "<td class='eliminar'><button class='red'><a href='borrarLibro.php?id=".$libro['idLibro']."'>Borrar</a></button></td>";
+                }
                 echo "</tr>";
             }
             ?>

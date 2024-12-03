@@ -16,9 +16,9 @@ require_once "seguridad.php";
         $userSalt = $datos["salt"];
         if($newPassword == $repeatPassword && password_verify($oldPassword.$userSalt,$userPassword)){
             $usuario->cambiarPassword(password_hash($newPassword.$userSalt,PASSWORD_DEFAULT),$_SESSION["usuario"]);
-            header("Location: index.php?msg=El cambio de password se realizo correctamente");
+            header("Location: cambiarPassword.php?msg=El cambio de password se realizo correctamente");
         }else{
-            header("Location: index.php?err=El cambio de password ha fallado");
+            header("Location: cambiarPassword.php?err=El cambio de password ha fallado");
 
         }
     }
@@ -32,7 +32,24 @@ require_once "seguridad.php";
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php
+        if(isset($_GET['msg'])){
+            echo "<h2 class='instalacion'>".$_GET['msg']."</h2>";
+        }
+        if(isset($_GET['err'])){
+            echo "<h2 class='error'>".$_GET['err']."</h2>";
+        }
+        if(isset($_SESSION['rol'])){
+            $usuario = $_SESSION['usuario'];
+            echo "<p><strong>$usuario</strong>  <a href='cerrarSesion.php'>Cerrar sesion</a></p>";
+        }   
+    ?>
     <h1>Cambiar contraseña</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php">Volver al inicio</a></li>
+        </ul>
+    </nav>
     <form action="" method="post">
         <label for="oldPassword">Contraseña actual: </label>
         <input type="password" name="oldPassword" id="">
@@ -43,7 +60,7 @@ require_once "seguridad.php";
         <label for="repeatPassword">Repite la nueva contraseña: </label>
         <input type="password" name="repeatPassword" id="">
         <br>
-        <input type="submit" value="enviar" name="enviar">
+        <input type="submit" value="Enviar" name="enviar">
     </form>
 </body>
 </html>

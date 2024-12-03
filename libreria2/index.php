@@ -54,6 +54,7 @@ $seguridad = new Seguridad();
         <li><a href="listadoLibros.php">Listado de libros</a></li>
         <li><a href="listadoAutores.php">Listado de autores</a></li>
         <li><a href="cambiarPassword.php">Cambiar contraseña</a></li>
+        <li><a href="modificarPerfil.php">Modificar mis datos</a></li>
         <?php
             if($seguridad->acceso('bibliotecario')){
         ?>

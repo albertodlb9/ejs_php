@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Listado de autores</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="./imagenes/icons8-libro-16.png">
 </head>
 <body>
 <?php

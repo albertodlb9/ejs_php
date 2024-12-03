@@ -24,7 +24,7 @@
             $ruta = $_FILES["admin_avatar"]["tmp_name"];
             $tipo = $_FILES["admin_avatar"]["type"];
             $tam = $_FILES["admin_avatar"]["size"];
-            $destino = "./imagenes/".$login.".jpg";
+            $destino = "./imagenes/".$login;
             if(move_uploaded_file($ruta, $destino) && $tam < 1000000){
                 $avatar = $destino;
 
@@ -112,6 +112,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instalacion</title>
     <link rel="stylesheet" href="style.css">
+    <link type="image/png" sizes="16x16" rel="icon" href="./imagenes/icons8-libro-16.png">
 </head>
 <body>
     <h1>Instalacion de la aplicacion</h1>

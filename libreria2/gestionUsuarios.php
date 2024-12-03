@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Gestion de usuarios</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="./imagenes/icons8-libro-16.png">
 </head>
 <body>
     <?php       
@@ -46,9 +47,9 @@
                 echo "<td>".$usuario['apellidos']."</td>";
                 echo "<td>".$usuario['login']."</td>";
                 echo "<td>".$usuario['rol']."</td>";
-                echo "<td class='modificar'><button><a href='modificarUsuario.php?login=".$usuario['login']."'>Modificar</a></button></td>";
+                echo "<td class='modificar'><button class='green'><a href='modificarUsuario.php?login=".$usuario['login']."'>Modificar</a></button></td>";
                 if($usuario['rol'] != 'administrador'){
-                    echo "<td class='eliminar'><button><a href='eliminarUsuario.php?login=".$usuario['login']."'>Eliminar</a></button></td>";
+                    echo "<td class='eliminar'><button class='red'><a href='eliminarUsuario.php?login=".$usuario['login']."'>Eliminar</a></button></td>";
                 }
                 echo "</tr>";
             }
